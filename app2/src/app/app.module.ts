@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 
 import { AppComponent } from './app.component';
 import { TopoComponent } from './topo/topo.component';
 import { HomeComponent } from './home/home.component';
 import { RodapeComponent } from './rodape/rodape.component';
-import OfertasServices from './ofertas.service';
+import { OfertasService } from './ofertas.service';
 
 
 @NgModule({
@@ -17,10 +18,11 @@ import OfertasServices from './ofertas.service';
     RodapeComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
   providers: [
-    OfertasServices
+    OfertasService
   ],
   bootstrap: [AppComponent]
 })
