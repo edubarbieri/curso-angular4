@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { OfertasService } from '../ofertas.service';
 import Oferta from '../shared/oferta.model';
+
 @Component({
   selector: 'app-oferta',
   templateUrl: './oferta.component.html',
   styleUrls: ['./oferta.component.css']
 })
-export class OfertaComponent implements OnInit {
+export class OfertaComponent implements OnInit, OnDestroy {
 
   public oferta: Oferta = new Oferta();
 
@@ -19,14 +20,15 @@ export class OfertaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const id = this.route.snapshot.params['id'];
-    this.ofertaService.getOferta(id).then((value: Oferta) => {
-      this.oferta = value;
-      this.currentImg = value.imagens[0]['url'];
-      console.log(value);
+    this.route.params.subscribe((params: Params) => {
+      this.ofertaService.getOferta(params.id).then((value: Oferta) => {
+        this.oferta = value;
+        this.currentImg = value.imagens[0]['url'];
+      });
     });
+  }
 
-    console.log('ID acessado: ', id);
+  ngOnDestroy() {
   }
 
   changeImg(src: string) {
