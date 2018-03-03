@@ -199,6 +199,20 @@
       "complemento": "blc j",
       "formaPagamento": "dinheiro",
       "id": 2
+    },
+    {
+      "endereco": "Rua Coronel Chicuta",
+      "numero": "600",
+      "complemento": "",
+      "formaPagamento": "dinheiro",
+      "id": 3
+    },
+    {
+      "endereco": "Ruadas asdasd asda",
+      "numero": "123",
+      "complemento": "123123",
+      "formaPagamento": "dinheiro",
+      "id": 4
     }
   ]
 }
