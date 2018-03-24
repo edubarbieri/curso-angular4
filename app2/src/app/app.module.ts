@@ -4,8 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-import { FormsModule } from '@angular/forms';
-
+//import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { ROUTES } from './app.routes';
@@ -48,7 +48,8 @@ registerLocaleData(localePt);
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES),
-    FormsModule
+    // FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     OfertasService,
