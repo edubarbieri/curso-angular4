@@ -187,46 +187,73 @@
   ],
   "pedidos": [
     {
-      "endereco": "Rua marau",
-      "numero": "70",
-      "complemento": "blx j",
-      "formaPagamento": "debito",
+      "endereco": "Rua Marau ",
+      "numero": "70 ",
+      "complemento": "apto 202 J",
+      "formaPagamento": "dinheiro",
+      "items": [
+        {
+          "id": 2,
+          "img": {
+            "url": "/assets/ofertas/2/img1.jpg"
+          },
+          "titulo": "Cozinha Mexicana",
+          "descricaoOferta": "Almoço ou Jantar com Rodízio Mexicano delicioso.",
+          "valor": 32.9,
+          "quantidade": 1
+        }
+      ],
       "id": 1
     },
     {
       "endereco": "Rua Marau",
       "numero": "70",
-      "complemento": "blc j",
+      "complemento": "apto202",
       "formaPagamento": "dinheiro",
+      "items": [
+        {
+          "id": 2,
+          "img": {
+            "url": "/assets/ofertas/2/img1.jpg"
+          },
+          "titulo": "Cozinha Mexicana",
+          "descricaoOferta": "Almoço ou Jantar com Rodízio Mexicano delicioso.",
+          "valor": 32.9,
+          "quantidade": 1
+        }
+      ],
+      "total": 32.9,
       "id": 2
     },
     {
-      "endereco": "Rua Coronel Chicuta",
-      "numero": "600",
-      "complemento": "",
-      "formaPagamento": "dinheiro",
+      "endereco": "Rua marau ",
+      "numero": "70",
+      "complemento": "Casa",
+      "formaPagamento": "debito",
+      "items": [
+        {
+          "id": 1,
+          "img": {
+            "url": "/assets/ofertas/1/img1.jpg"
+          },
+          "titulo": "Super Burger",
+          "descricaoOferta": "Rodízio de Mini-hambúrger com opção de entrada.",
+          "valor": 29.9,
+          "quantidade": 6
+        },
+        {
+          "id": 4,
+          "img": {
+            "url": "/assets/ofertas/4/img1.jpg"
+          },
+          "titulo": "Estância das águas",
+          "descricaoOferta": "Diversão garantida com piscinas, trilhas e muito mais.",
+          "valor": 31.9,
+          "quantidade": 1
+        }
+      ],
+      "total": 211.29999999999998,
       "id": 3
-    },
-    {
-      "endereco": "Ruadas asdasd asda",
-      "numero": "123",
-      "complemento": "123123",
-      "formaPagamento": "dinheiro",
-      "id": 4
-    },
-    {
-      "endereco": "asdasdasda asdasd",
-      "numero": "123",
-      "complemento": "1asda asd asd",
-      "formaPagamento": "dinheiro",
-      "id": 5
-    },
-    {
-      "endereco": "asdasdasd asdasda",
-      "numero": "23213",
-      "complemento": "wsdasda",
-      "formaPagamento": "dinheiro",
-      "id": 6
     }
   ]
 }

@@ -20,7 +20,9 @@
             </ul>
         </div>
         <div class="col-2">
-            <a a href="#"><img src="/assets/carrinho.png" /></a>
+            <a [routerLink]="['/ordem-compra']">
+              <img src="/assets/carrinho.png" /> {{carrinhoService.getItems().length}}
+            </a>
         </div>
       </div>
     </div>

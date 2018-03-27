@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { OrdemCompraService } from '../ordem-compra.service'
-import { Pedido } from '../shared/pedido.model'
+import { OrdemCompraService } from '../ordem-compra.service';
+import { Pedido } from '../shared/pedido.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CarrinhoService } from '../carrinho.service';
+import { ItemCarrinho } from '../shared/item-carrinho.model';
 
 @Component({
   selector: 'app-ordem-compra',
@@ -29,27 +31,48 @@ export class OrdemCompraComponent implements OnInit {
   });
 
   public idPedidoCompra: number;
+  public items: ItemCarrinho[];
 
-  constructor(private ordemCompraService: OrdemCompraService) { }
+  constructor(private ordemCompraService: OrdemCompraService,
+              public carrinhoService: CarrinhoService) { }
 
   ngOnInit() {
-
+    console.log('Itens do carrinho: ', this.carrinhoService.exibirItems());
+    this.loadCart();
+  }
+  private loadCart() {
+    this.items = this.carrinhoService.getItems();
   }
 
+  public get total(): number {
+    let vlrTotal = 0;
+    for (const item of this.items) {
+        vlrTotal += item.valor * item.quantidade;
+    }
+    return vlrTotal;
+}
+
   public confirmarCompra(): void {
-    if(this.formulario.valid){
-      let pedido = new Pedido(
+    if (this.items.length <= 0) {
+      alert('Voce não possui itens no carrinho.');
+      return;
+    }
+    if (this.formulario.valid) {
+      const pedido = new Pedido(
         this.formulario.value.endereco,
         this.formulario.value.numero,
         this.formulario.value.complemento,
-        this.formulario.value.formaPagamento
+        this.formulario.value.formaPagamento,
+        this.items,
+        this.carrinhoService.total
       );
       console.log(pedido);
       this.ordemCompraService.efetivarCompra(pedido)
-      .subscribe((resp: any) =>{
-        this.idPedidoCompra = resp.id;
-        console.log(this.idPedidoCompra);
-      });
+        .subscribe((resp: any) => {
+          this.idPedidoCompra = resp.id;
+          console.log(this.idPedidoCompra);
+          this.carrinhoService.clearCart();
+        });
     }
   }
 }

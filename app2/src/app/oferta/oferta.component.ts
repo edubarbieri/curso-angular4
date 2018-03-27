@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { OfertasService } from '../ofertas.service';
 import Oferta from '../shared/oferta.model';
+import { CarrinhoService } from '../carrinho.service';
 
 @Component({
   selector: 'app-oferta',
@@ -16,7 +17,9 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private ofertaService: OfertasService
+    private ofertaService: OfertasService,
+    public carrinhoService: CarrinhoService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -25,7 +28,10 @@ export class OfertaComponent implements OnInit, OnDestroy {
         this.oferta = value;
         this.currentImg = value.imagens[0]['url'];
       });
+      window.scrollTo(0, 0);
     });
+
+    console.log('Itens do carrinho: Order de compras', this.carrinhoService.exibirItems());
   }
 
   ngOnDestroy() {
@@ -33,6 +39,12 @@ export class OfertaComponent implements OnInit, OnDestroy {
 
   changeImg(src: string) {
     this.currentImg = src;
+  }
+
+  addItemToCart() {
+    this.carrinhoService.addItemToCart(this.oferta);
+    console.log('Itens do carrinho: Order de compras', this.carrinhoService.exibirItems());
+    this.router.navigateByUrl('/ordem-compra');
   }
 
 }
