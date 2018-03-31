@@ -10,7 +10,7 @@
            (@animacao-painel.start)="inicioAnimacao()"
            (@animacao-painel.done)="fimAnimacao()"
       >
-        <app-cadastro (clickLogin)="cadastro = false;"></app-cadastro>
+        <app-cadastro (clickLogin)="cadastro = false;" (onError)="onErrorPainel()"></app-cadastro>
       </div>
     </div>
     <ng-template #formLogin>
@@ -18,7 +18,7 @@
            [@animacao-painel]="estadoPainel"
            (@animacao-painel.start)="inicioAnimacao()"
            (@animacao-painel.done)="fimAnimacao()">
-        <app-login (clickCadastro)="cadastro = true;"></app-login >
+        <app-login (clickCadastro)="cadastro = true;" (onError)="onErrorPainel()"></app-login >
       </div>
     </ng-template>
   </div>

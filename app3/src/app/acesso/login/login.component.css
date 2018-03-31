@@ -5,3 +5,7 @@
     height: 60px;
     width: 100%;
 }
+
+.ng-touched.ng-invalid{
+    border-color: red;
+}

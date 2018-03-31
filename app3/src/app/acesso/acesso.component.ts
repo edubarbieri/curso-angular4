@@ -30,11 +30,18 @@ import {trigger, state, style, transition, animate, keyframes} from '@angular/an
         animate('1500ms 0s ease-in-out', keyframes([
           style({offset: 0.50, opacity: 1, transform: 'translateX(0)'}),
           style({offset: 0.86, opacity: 1, transform: 'translateX(0)'}),
-          style({offset: 0.88, opacity: 1, transform: 'translateY(-10px)'}),
-          style({offset: 0.90, opacity: 1, transform: 'translateY(10px)'}),
-          style({offset: 0.92, opacity: 1, transform: 'translateY(-10px)'}),
-          style({offset: 0.94, opacity: 1, transform: 'translateY(10px)'}),
-          style({offset: 0.96, opacity: 1, transform: 'translateY(-10px)'}),
+        ]))
+      ]),
+      state('error', style({
+        opacity: 1
+      })),
+      transition('criado => error', [
+        animate('400ms 0s ease-in-out', keyframes([
+          style({offset: 0.0, opacity: 1, transform: 'translateY(-10px)'}),
+          style({offset: 0.20, opacity: 1, transform: 'translateY(10px)'}),
+          style({offset: 0.42, opacity: 1, transform: 'translateY(-10px)'}),
+          style({offset: 0.64, opacity: 1, transform: 'translateY(10px)'}),
+          style({offset: 0.86, opacity: 1, transform: 'translateY(-10px)'}),
           style({offset: 0.98, opacity: 1, transform: 'translateY(10px)'}),
         ]))
       ])
@@ -58,5 +65,12 @@ export class AcessoComponent implements OnInit {
   }
   fimAnimacao() {
     console.log('Fim animação');
+  }
+
+  onErrorPainel(){
+    this.estadoPainel = 'error'
+    setTimeout(() =>{
+      this.estadoPainel = 'criado';
+    }, 1000)
   }
 }
