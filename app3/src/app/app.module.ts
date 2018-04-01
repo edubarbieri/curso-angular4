@@ -14,6 +14,8 @@ import { HomeComponent } from './home/home.component';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
 import { ROUTES } from './app.routes';
 import { AutenticacaoGuard } from './autenticacao-guard.service';
+import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
+import { Bd } from './bd.service';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { AutenticacaoGuard } from './autenticacao-guard.service';
     LoginComponent,
     CadastroComponent,
     HomeComponent,
-    PublicacoesComponent
+    PublicacoesComponent,
+    IncluirPublicacaoComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { AutenticacaoGuard } from './autenticacao-guard.service';
   ],
   providers: [
     Autenticacao,
-    AutenticacaoGuard
+    AutenticacaoGuard,
+    Bd
   ],
   bootstrap: [AppComponent]
 })
