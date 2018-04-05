@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Bd } from '../../bd.service';
 import * as firebase from 'firebase';
 import { Progresso } from '../../progresso.service';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/Rx';
-import { Subject } from 'rxjs/Rx';
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/takeUntil';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-incluir-publicacao',
@@ -28,6 +29,13 @@ export class IncluirPublicacaoComponent implements OnInit {
 
   private imagem: any;
 
+
+  public progressoPublicacao = 'pendente';
+  public porcentagemUpload = 0;
+
+  @Output()
+  public novaPublicao = new EventEmitter();
+
   ngOnInit() {
     firebase.auth().onAuthStateChanged((user) => {
       this.userUid = user.uid;
@@ -44,23 +52,28 @@ export class IncluirPublicacaoComponent implements OnInit {
     }
 
     console.log('Incluir post: ', this.formulario.value);
-    this.bd.publicar({
-      uid: this.userUid,
+    this.bd.publicar(this.userUid, {
       titulo: this.formulario.value.titulo,
       imagem: this.imagem
     });
 
-    const acompanhamentoUploado = Observable.interval(1500);
+    const acompanhamentoUploado = Observable.interval(100);
     const continua = new Subject();
     continua.next(true);
+    this.progressoPublicacao = 'andamento';
+    this.porcentagemUpload = 0;
     acompanhamentoUploado
       .takeUntil(continua)
       .subscribe(() => {
-        console.log('Status', this.progresso.status);
-        console.log('Estados', this.progresso.estado);
-
+        // console.log('Status', this.progresso.status);
+        // console.log('Estados', this.progresso.estado);
+        if (this.progresso.estado) {
+          this.porcentagemUpload = Math.round((this.progresso.estado.bytesTransferred / this.progresso.estado.totalBytes) * 100);
+        }
         if (this.progresso.status === 'concluido') {
+          this.progressoPublicacao = 'concluido';
           continua.next(false);
+          this.novaPublicao.emit('');
         }
       });
 
